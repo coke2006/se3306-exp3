@@ -46,7 +46,7 @@ export default function RemotePosts({
   const isDefault =
     category === "全部" && q === "" && page === 1 && sort === "publishedAt" && order === "desc";
 
-  const { data, isError } = useQuery<PostPageData>({
+  const { data, isPending, isError } = useQuery<PostPageData>({
     queryKey: ["posts", { category, q, page, sort, order }],
     queryFn: () =>
       fetch(
@@ -57,6 +57,9 @@ export default function RemotePosts({
   });
 
   const view = isDefault ? serverData : (data ?? serverData);
+  // 切条件后 Query 首次请求还没回来时，明确显示加载中，
+  // 避免把上一个条件的旧列表顶着新 URL 展示（ai-review 条目 3）
+  const fetchingFirstPage = !isDefault && !data && !isError;
 
   // 把当前条件写进 URL：非默认值才上参数，刷新 / 分享 / 后退都不丢
   function syncUrl(next: ListConditions) {
@@ -143,9 +146,11 @@ export default function RemotePosts({
         </button>
       </div>
 
-      {/* 列表：三态都有交代——出错 / 空态 / 正常 */}
+      {/* 列表：四态都有交代——出错 / 请求中 / 空态 / 正常 */}
       {isError ? (
         <p className="text-red-600">加载失败了，请刷新重试。</p>
+      ) : fetchingFirstPage ? (
+        <p className="text-gray-500">加载中…</p>
       ) : view.items.length === 0 ? (
         <p>没有匹配的文章。</p>
       ) : (
