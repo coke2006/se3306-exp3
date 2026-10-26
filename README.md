@@ -51,7 +51,8 @@ node tools/smoke.js   # 端到端冒烟测试（需先 npm start）
 
 ## 部署
 
-- 线上地址：<https://se3306-exp3-rho.vercel.app>
+- 线上地址（国内可直连）：<https://se3306-lab3-blog.app.workbuddy.host/?sharecode=N55MNBMA7Q>
+- 镜像地址（Vercel）：<https://se3306-exp3-rho.vercel.app>
 - 仓库（Gitee）：<https://gitee.com/coker-coal/se3306-exp3>
 
 部署在 Vercel（支持 Next 16 新缓存模型与 PPR）。部署环境下文件系统只读，
