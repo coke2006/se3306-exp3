@@ -51,8 +51,12 @@ node tools/smoke.js   # 端到端冒烟测试（需先 npm start）
 
 ## 部署
 
+- 线上地址：<https://se3306-exp3-rho.vercel.app>
+- 仓库（Gitee）：<https://gitee.com/coker-coal/se3306-exp3>
+
 部署在 Vercel（支持 Next 16 新缓存模型与 PPR）。部署环境下文件系统只读，
 `lib/db.ts` 会自动改写到 `/tmp`（见 `process.env.VERCEL` 分支），线上同样能发布、评论、点赞。
+上线后实测：首页 / 文章页 / 写作页均 200，文章页服务端渲染出正文，`/api/posts` 返回种子数据。
 
 ## 备注
 
