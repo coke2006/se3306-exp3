@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 本地测试/测量脚本（CommonJS，不参与构建）
+    "tools/**",
   ]),
 ]);
 
